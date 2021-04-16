@@ -1,0 +1,82 @@
+<app-loading *ngIf="loading">
+</app-loading>
+<div class="row animated fadeIn" *ngIf="!loading">
+    <div class="col-2">
+        <img [src]="artista.images | noimage" class="img-thumbnail  img-circle">
+    </div>
+    <div class="col">
+        <h3>{{artista.name}}</h3>
+        <p>
+            <a [href]="artista.external_urls.spotify" target="_blank" rel="noopener noreferrer">
+          Ir a la pagina del artista
+        </a>
+        </p>
+    </div>
+    <div class="col-4 text-right">
+        <button routerLink="/search" class="btn btn-outline-danger">Regresar</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Album</th>
+                    <th>Cancion</th>
+                    <th>Vista previa</th>
+                    <th>Agregar a la lista</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let track of topTracks">
+                    <td>
+                        <img [src]="track.album.images |noimage" class="img-thumb" alt="">
+                    </td>
+                    <td>{{track.album.name}}</td>
+                    <td>{{track.name}}</td>
+                    <td>
+                        <audio [src]="track.preview_url" controls></audio>
+                    </td>
+                    <td>
+                        <button (click)="agregar(track)" type="button" class="btn btn-outline-success">agregar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="col">
+        <h1>Mi Play List</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Album</th>
+                    <th>Cancion</th>
+                    <th>Vista previa</th>
+                    <th>eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dato of canciones">
+                    <td>
+                        <img [src]="dato.album.images |noimage" class="img-thumb" alt="">
+                    </td>
+                    <td>{{dato.album.name}}</td>
+                    <td>{{dato.name}}</td>
+                    <td>
+                        <audio [src]="dato.preview_url" controls></audio>
+                    </td>
+                    <td>
+                        <button (click)="eliminar(dato)" type="button" class="btn btn-outline-danger">eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
